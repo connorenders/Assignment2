@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href=http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css>
+    <meta charset="utf-8" />
+    <title>Enders Game</title>
+</head>
+
+
+
+<body>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js></script>
+
+
+
+    <div id="wrapper">
+
+        <h1 id="head" onclick="backgroundChange()">Enders Game</h1>
+        <input type="text" id="query"><br><br>
+
+        <button type="button" onclick="apiSearch()">Search</button>
+
+
+        <button id="datetime" type="button"
+                onclick="document.getElementById('time').innerHTML = tellTime(); ">
+            What's the time?
+        </button>
+
+        <br />
+        <br />
+        <br />
+        <button type="button" class="button2" onclick=window.open(feelingLucky())> Feeling Lucky? </button>
+
+
+        <!---test
+        <button onclick="myFunction()">Try it</button>
+        -->
+
+        <div id="searchResults"></div>
+        <div id="time"></div>
+
+
+        <div id="dialog" title="Basic dialog">
+
+        </div>
+    </div>
+
+    <!---JAVASCRIPT-->
+
+    <script>function feelingLucky() {
+
+            apiSearch();
+
+            var link = document.getElementsByTagName('a')[0];
+            return link;
+
+
+        }</script>
+
+
+    <script>function tellTime() {
+            var today = new Date();
+            var hours = today.getHours();
+            var minutes = today.getMinutes();
+            if (minutes < 10) {
+                return hours + ":0" + minutes;
+            }
+            return hours + ":" + minutes;
+        }</script>
+
+
+    <script>function backgroundChange() {
+            document.getElementById('wrapper').style.backgroundImage = "url(css/space.jpg)";
+        }</script>
+
+
+    <script>$(function () {
+            var a = document.getElementById('datetime');
+            a.addEventListener('click', function () { alert(document.getElementById('time').innerHTML); }, false);
+
+        });</script>
+
+
+    <script>function apiSearch() {
+            var params = {
+                'q': $('#query').val(),
+                'count': 50,
+                'offset': 0,
+                'mkt': 'en-us'
+            };
+
+            $.ajax({
+                url: 'https://api.bing.microsoft.com/v7.0/search?' + $.param(params),
+                type: 'GET',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': '79a2f58b34d4411c940cb6d22d5074a5'
+                }
+            })
+                .done(function (data) {
+                    var len = data.webPages.value.length;
+                    var results = '';
+                    for (i = 0; i < len; i++) {
+                        results += `<p><a href="${data.webPages.value[i].url}">${data.webPages.value[i].name}</a>: ${data.webPages.value[i].snippet}</p>`;
+                    }
+
+                    $('#searchResults').html(results);
+                    $('#searchResults').dialog();
+                })
+                .fail(function () {
+                    alert('error');
+                });
+        }</script>
+
+
+
+
+</body>
+</html>
+<!---JAVASCRIPT
+
+
+
+    document.addEventListener("click", changeBackground);
+    --->

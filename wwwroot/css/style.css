@@ -1,0 +1,56 @@
+body {
+    text-align: center;
+    color: white;
+    position: center;
+}
+
+h1 {
+    color: white;
+    margin-top: 20%;
+    font-size: 40px;
+}
+
+#time {
+    color: black;
+    visibility: hidden;
+}
+
+#searchResults {
+    visibility: hidden;
+}
+
+#wrapper {
+    background-image: url('chess.jpg');
+    height: 2000px;
+    width: 100%;
+    padding: 1px;
+    background-size: cover;
+    color: white;
+}
+
+button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.button2 {
+    background-color: peachpuff;
+    border: none;
+    color: black;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-style: oblique;
+}
+
+query {
+    width: 10%;
+}
